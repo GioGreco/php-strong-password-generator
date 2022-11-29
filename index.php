@@ -1,9 +1,31 @@
 <?php
 session_start();
+$characters = [
+    'numbers' => '0123456789',
+    'alphabet' => 'abcdefghijklmnopqrstuvwxyz',
+    'symbols' => '|$%&/()[]{}?!*#@;<>:'
+];
+$inputError = false;
 
     if(isset($_SESSION) && isset($_GET['pswLen'])){
         $_SESSION['pswLength'] = $_GET['pswLen'];
         $_SESSION['filters'] = $_GET['filterChar'];
+
+        $_SESSION['excludeRepetitions'] = false;
+        if(isset($_GET['repeat'])){
+            $_SESSION['excludeRepetitions'] = true;
+            // risolvi errore 'password troppo lunga senza ripetizioni'
+            // $totalLength = 0;
+            // foreach($_SESSION['filters'] as $filter){
+            //     $totalLength += strlen($characters[$filter]);
+            // }
+            // if($totalLength >= $_GET['pswLen']){
+            //     $_SESSION['excludeRepetitions'] = true;
+            // }
+            // else{
+            //     $inputError = true;
+            // }
+        }
         header('Location: ./success.php');
     }
 ?>
@@ -21,7 +43,18 @@ session_start();
         <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        
+        <?php
+            if($inputError){
+        ?>
+
+            <div class="alert alert-danger">
+                Impossibile generare una password di questa lunghezza con caratteri differenti! <br>
+                <b>Ridurre lunghezza della password</b> o <b>consentire la ripetizione di caratteri</b>.
+            </div>
+
+        <?php
+            }
+        ?>
         <div class="vh-100 bg-black d-flex justify-content-center align-items-center">
                 <form class="d-flex flex-column justify-content-around align-items-center text-white" action="index.php" method="GET" name="pswLength">
                     <span class="fs-2 mb-2 text-uppercase">Quanto vuoi che sia lunga la tua password?</span>

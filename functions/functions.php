@@ -26,8 +26,11 @@
             }else{
                 $randChar = strtoupper($randCat[rand(0, strlen($randCat) - 1)]);
             }
-
-            $result .= $randChar ;
+            if($_SESSION['excludeRepetitions'] && !(str_contains($result, $randChar))){
+                $result .= $randChar ;
+            }else if(!($_SESSION['excludeRepetitions'])){
+                $result .= $randChar ;
+            }
         }
         return $result;
     }

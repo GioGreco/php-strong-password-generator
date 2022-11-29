@@ -16,3 +16,10 @@ hr {
   width: 100%;
   opacity: 0.8;
 }
+
+.alert {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: (-50%, 0);
+}
