@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-    include __DIR__.'/functions/functions.php';
     if(isset($_SESSION) && isset($_GET['pswLen'])){
         $_SESSION['pswLength'] = $_GET['pswLen'];
+        $_SESSION['filters'] = $_GET['filterChar'];
         header('Location: ./success.php');
     }
 ?>
@@ -23,10 +23,35 @@ session_start();
     <body>
         
         <div class="vh-100 bg-black d-flex justify-content-center align-items-center">
-                <form class="d-flex flex-column justify-content-around align-items-center" action="index.php" method="GET" name="pswLength">
-                    <span class="fs-2 text-white mb-2 text-uppercase">Quanto vuoi che sia lunga la tua password?</span>
+                <form class="d-flex flex-column justify-content-around align-items-center text-white" action="index.php" method="GET" name="pswLength">
+                    <span class="fs-2 mb-2 text-uppercase">Quanto vuoi che sia lunga la tua password?</span>
                     <input type="number" name="pswLen" id="pswLen" class="pswInput mb-4">
-                    <button type="submit" class="btn btn-primary">INVIA</button>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div>
+                            <span class="d-block mb-2">Che tipo di caratteri vuoi includere?</span>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="filterChar[]" id="numbers" checked value="numbers">
+                                <label for="numbers" class="form-check-label">Numeri</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="filterChar[]" id="letters" checked value="alphabet">
+                                <label for="letters" class="form-check-label">Lettere</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="filterChar[]" id="symbols" checked value="symbols">
+                                <label for="symbols" class="form-check-label">Simboli</label>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="repeat" id="repeat" value="noRepeat">
+                            <label for="repeat" class="form-check-label">Escludi ripetizioni di caratteri</label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">INVIA</button>
+                        <button type="reset" class="btn btn-danger">RESET</button>
+                    </div>
                 </form>
         </div>
 

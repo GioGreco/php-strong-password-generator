@@ -16,7 +16,7 @@ $newPSW = generatePSW($_SESSION['pswLength']);
 </head>
 <body>
     <div class="vh-100 bg-black d-flex flex-column justify-content-center align-items-center">
-        <span class="fs-2 text-white mb-2 text-uppercase">La tua nuova password:</span>
+        <span class="fs-2 text-white mb-2 text-uppercase text-center">La tua nuova password:</span>
         <h1 class="text-white"><?php echo $newPSW; ?></h1>
     </div>
 </body>

@@ -10,3 +10,9 @@
   text-align: center;
   line-height: 40px;
 }
+
+hr {
+  border: 1px solid white;
+  width: 100%;
+  opacity: 0.8;
+}
